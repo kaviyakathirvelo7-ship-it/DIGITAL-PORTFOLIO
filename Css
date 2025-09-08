@@ -1,0 +1,232 @@
+/* Universal Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #0d1117; /* Dark background for a modern look */
+    color: #e6edf3; /* Light text color */
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* Header & Navigation */
+header {
+    background: rgba(13, 17, 23, 0.8);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #58a6ff; /* A vibrant blue for the name */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-left: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #c9d1d9;
+    font-weight: 400;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #58a6ff;
+}
+
+/* Main Content Sections */
+main {
+    padding-top: 80px; /* Offset for fixed header */
+}
+
+section {
+    padding: 4rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Color with Gradient */
+#about {
+    background: linear-gradient(135deg, #161b22, #0d1117);
+}
+
+#skills {
+    background: linear-gradient(135deg, #0d1117, #161b22);
+}
+
+#projects {
+    background: linear-gradient(135deg, #161b22, #0d1117);
+}
+
+#contact {
+    background: linear-gradient(135deg, #0d1117, #161b22);
+}
+
+.content {
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #58a6ff;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #58a6ff;
+    border-radius: 2px;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Skills Section */
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.skill-item {
+    background-color: #21262d;
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    border: 1px solid #30363d;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.skill-item:hover {
+    transform: translateY(-5px);
+    background-color: #30363d;
+}
+
+/* Projects Section */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background-color: #161b22;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #30363d;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}
+
+.project-card h3 {
+    color: #58a6ff;
+    margin-top: 0;
+}
+
+.project-card p {
+    font-size: 0.95rem;
+    color: #c9d1d9;
+}
+
+/* Contact Section */
+.contact-info a {
+    color: #58a6ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+    color: #79c0ff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #161b22;
+    border-top: 1px solid #30363d;
+    font-size: 0.9rem;
+    color: #8b949e;
+}
+
+/* Animation Effects */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    nav ul {
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav li {
+        margin: 0.5rem 0;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .skill-item {
+        padding: 0.6rem 1rem;
+    }
+}
