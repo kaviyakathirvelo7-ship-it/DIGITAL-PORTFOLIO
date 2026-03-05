@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<title>Techno shots 2026 Event Registration</title> style.css
+<style> 
+/* 🌈 Global Styling */ body { 
+    font-family: Arial, sans-serif; 
+    background: linear-gradient(to right, #ff9a9e, #fad0c4, #a18cd1);     margin: 0;     padding: 20px; 
+} 
+/* 🌟 Title */ 
+.title {     text-align: center;     font-size: 40px;     color: #ffffff; 
+    text-shadow: 2px 2px 5px black;
+}
+.description {     text-align: center;     margin-bottom: 20px;     line-height: 1.6;     color: #2c3e50;     font-weight: bold;
+}
+/* 🎨 Event Info */ .event-info { 
+    background: linear-gradient(to right, #43cea2, #185a9d);     color: white;     padding: 15px;     border-radius: 10px;     margin-bottom: 20px; 
+}
+/* 📝 Form Container */ .form-container { 
+    background: linear-gradient(to right, #ffffff, #f8ffae);     padding: 20px;     border-radius: 15px; 
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.3);     margin-bottom: 20px; 
+}
+fieldset {     border: 2px solid #ff6f61;     padding: 15px;     margin-bottom: 15px;     border-radius: 10px;
+}
+legend {     font-weight: bold;     background-color: #ff6f61;     color: white;     padding: 5px 15px;     border-radius: 8px;
+}
+/* 🖊 Inputs */ input[type="text"], input[type="email"], input[type="date"], select {     width: 100%;     padding: 10px;     margin: 5px 0 10px 0;     border-radius: 8px;     border: 2px solid #a18cd1; 
+}
+input:focus, select:focus {     border-color: #ff6f61;     outline: none; 
+}
+/* 🎯 Buttons */
+.buttons input { 
+    background: linear-gradient(to right, #ff512f, #dd2476);     color: white;     padding: 12px 18px;     border: none;     border-radius: 8px;     cursor: pointer;     margin-right: 10px;     font-size: 16px;     transition: 0.3s;
+}
+.buttons input:hover {     transform: scale(1.1);
+}
+/* 📋 Declaration */ .declaration {     margin: 10px 0;     font-weight: bold;
+}
+/* 📊 Table */ table {     width: 100%;     border-collapse: collapse;     background-color: white;     border-radius: 10px;     overflow: hidden;
+}
+th {
+    background: linear-gradient(to right, #36d1dc, #5b86e5);     color: white;     padding: 12px;
+}
+td {     padding: 10px;     text-align: center;
+}
+tr:nth-child(even) {     background-color: #f9f9f9; 
+}
+tr:hover {
+    background-color: #ffe0f0; 
+}
+/* 🔵 Footer */ footer {
+    background: linear-gradient(to right, #141e30, #243b55);     color: white;     text-align:center;     padding: 15px;     margin-top: 20px;     font-size: 14px;     border-radius: 10px;
+}
+</style>
+</head>
+<body>
+<h1 class="title">Techno shots 2026</h1> 
+<p class="description"> 
+Web Development Workshop organized by the Department of Computer Applications. 
+</p>
+<div class="event-info"> 
+<h2>Event Information</h2> 
+<p><b>Date:</b> 15 March 2026</p> 
+<p><b>Time:</b> 10:00 AM – 4:00 PM</p> 
+<p><b>Venue:</b> Computer Lab – Block A</p> 
+<p><b>Organizer:</b> Department of Computer Applications</p> 
+</div>
+<div class="form-container"> 
+<h2>Registration Form</h2> 
+<form>
+<fieldset> 
+<legend>Personal Information</legend> 
+<label>Full Name:</label> 
+<input type="text"> 
+<label>Email:</label> 
+<input type="email"> 
+<label>Phone Number:</label> 
+<input type="text"> 
+<label>Date of Birth:</label> 
+<input type="date"> 
+<label>Gender:</label><br> 
+<input type="radio" name="gender"> Male 
+<input type="radio" name="gender"> Female 
+</fieldset> 
+<fieldset> 
+<legend>Event Selection</legend> 
+<label>Workshop Topic:</label> 
+<select> 
+<option>HTML Basics</option> 
+<option>CSS Basics</option> 
+<option>JavaScript Basics</option> 
+</select> 
+<label>Mode of Participation:</label><br> 
+<input type="radio" name="mode"> Online
+<input type="radio" name="mode"> Offline </fieldset> 
+<div class="declaration"> 
+<input type="checkbox"> I confirm that the details are correct. 
+</div> 
+<div class="buttons"> 
+<input type="submit" value="Register"> 
+<input type="reset" value="Clear"> 
+</div> 
+</form> 
+</div> 
+<h2>Registered Participants</h2> 
+<table> 
+<tr> 
+<th>Name</th> 
+<th>Email</th> 
+<th>Phone</th> 
+<th>Event</th> 
+<th>Mode</th> 
+</tr> 
+<tr> 
+<td>RAM K</td> 
+<td>ramk17@gmail.com</td> 
+<td>86625387342</td> 
+<td>Techno shots 2026</td> 
+<td>Online</td> 
+</tr> 
+</table> 
+<footer> 
+<p>Contact Email: kavi@gmail.com</p> 
+<p>Help Desk: +91 8978310729</p> 
+<p>© 2026 Department of Computer Application</p> 
+</footer> java.script <script>
+document.querySelector("form").addEventListener("submit", function(e){
+e.preventDefault(); /* Get values */
+let name=document.querySelector('input[type="text"]').value.trim(); let email=document.querySelector('input[type="email"]').value.trim(); let phone=document.querySelectorAll('input[type="text"]')[1].value.trim(); let dob=document.querySelector('input[type="date"]').value; let event=document.querySelector("select").value;
+let confirm=document.querySelector('input[type="checkbox"]').checked;
+let gender=document.querySelector('input[name="gender"]:checked'); let mode=document.querySelector('input[name="mode"]:checked');
+/* Validation */
+let emailPattern=/^[^ ]+@[^ ]+\.[a-z]{2,3}$/; let phonePattern=/^[0-9]{10}$/;
+if(name===""){ alert("Name cannot be empty"); return;
+}
+if(!emailPattern.test(email)){ alert("Enter valid email"); return;
+}
+if(!phonePattern.test(phone)){ alert("Phone number must be 10 digits"); return;
+}
+if(dob===""){ alert("Select Date of Birth"); return;
+}
+if(!gender){ alert("Select Gender"); return;
+}
+if(event===""){ alert("Select Event"); return;
+}
+if(!mode){ alert("Select Mode"); return;
+}
+if(!confirm){
+alert("Please confirm details"); return;
+}
+/* Add data to table */
+let table=document.querySelector("table");
+let row=table.insertRow();
+row.insertCell(0).innerHTML=name; row.insertCell(1).innerHTML=email; row.insertCell(2).innerHTML=phone; row.insertCell(3).innerHTML=event;
+row.insertCell(4).innerHTML=mode.nextSibling.textContent.trim();
+/* Success message */
+alert("Registration Successful!");
+/* Clear form */
+document.querySelector("form").reset();
+});
+</script>
+</body> 
+     </html>
