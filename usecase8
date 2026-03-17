@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>User Profile Editor</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #218838;
+    }
+
+    .message {
+        margin-top: 10px;
+        text-align: center;
+        color: green;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>User Profile</h2>
+
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="number" id="age" placeholder="Age">
+
+    <button onclick="saveProfile()">Save</button>
+
+    <div class="message" id="message">Profile Saved Successfully!</div>
+</div>
+
+<script>
+// Load data on page load
+window.onload = function() {
+    let user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+        user = { name: "John Doe", email: "john@example.com", age: 25 };
+        localStorage.setItem("user", JSON.stringify(user));
+    }
+
+    document.getElementById("name").value = user.name;
+    document.getElementById("email").value = user.email;
+    document.getElementById("age").value = user.age;
+};
+
+function saveProfile() {
+    const user = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        age: document.getElementById("age").value
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+
+    const msg = document.getElementById("message");
+    msg.style.display = "block";
+
+    setTimeout(() => {
+        msg.style.display = "none";
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
