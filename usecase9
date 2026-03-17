@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Task Manager</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .container {
+        background: white;
+        padding: 20px;
+        width: 350px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    input {
+        width: 70%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        padding: 8px 10px;
+        margin-left: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .add-btn {
+        background: #007bff;
+        color: white;
+    }
+
+    .task {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .actions button {
+        margin-left: 5px;
+    }
+
+    .edit {
+        background: orange;
+        color: white;
+    }
+
+    .delete {
+        background: red;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Task Manager</h2>
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button class="add-btn" onclick="addTask()">Add</button>
+
+    <div id="taskList"></div>
+</div>
+
+<script>
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+// Render tasks
+function renderTasks() {
+    const taskList = document.getElementById("taskList");
+    taskList.innerHTML = "";
+
+    tasks.forEach((task, index) => {
+        let div = document.createElement("div");
+        div.className = "task";
+
+        div.innerHTML = `
+            <span>${task}</span>
+            <div class="actions">
+                <button class="edit" onclick="editTask(${index})">Edit</button>
+                <button class="delete" onclick="deleteTask(${index})">Delete</button>
+            </div>
+        `;
+
+        taskList.appendChild(div);
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Add task
+function addTask() {
+    const input = document.getElementById("taskInput");
+    if (input.value.trim() === "") return;
+
+    tasks.push(input.value);
+    input.value = "";
+    renderTasks();
+}
+
+// Edit task
+function editTask(index) {
+    const newTask = prompt("Edit task:", tasks[index]);
+    if (newTask !== null && newTask.trim() !== "") {
+        tasks[index] = newTask;
+        renderTasks();
+    }
+}
+
+// Delete task
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    renderTasks();
+}
+
+// Initial render
+renderTasks();
+</script>
+
+</body>
+</html>
