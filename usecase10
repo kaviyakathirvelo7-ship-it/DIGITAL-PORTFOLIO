@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Real-Time Chat UI</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Chat Container */
+.chat-container {
+    width: 350px;
+    height: 500px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Chat Box */
+.chat-box {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* Messages */
+.message {
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 15px;
+    max-width: 70%;
+}
+
+.sent {
+    background: #0084ff;
+    color: white;
+    align-self: flex-end;
+}
+
+.received {
+    background: #e4e6eb;
+    align-self: flex-start;
+}
+
+/* Input Area */
+.input-area {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    background: #0084ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #005ecb;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+
+    <div class="input-area">
+        <input type="text" id="messageInput" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById("messageInput");
+    let message = input.value.trim();
+
+    if (message === "") return;
+
+    addMessage(message, "sent");
+    input.value = "";
+
+    // Simulated reply
+    setTimeout(() => {
+        let replies = [
+            "Hello!",
+            "How are you?",
+            "Nice to chat with you!",
+            "This is a demo reply.",
+            "Okay 👍"
+        ];
+        let reply = replies[Math.floor(Math.random() * replies.length)];
+        addMessage(reply, "received");
+    }, 1000);
+}
+
+function addMessage(text, type) {
+    let chatBox = document.getElementById("chatBox");
+
+    let msg = document.createElement("div");
+    msg.classList.add("message", type);
+    msg.innerText = text;
+
+    chatBox.appendChild(msg);
+
+    // Auto scroll
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Send message on Enter key
+document.getElementById("messageInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
+});
+</script>
+
+</body>
+</html>
