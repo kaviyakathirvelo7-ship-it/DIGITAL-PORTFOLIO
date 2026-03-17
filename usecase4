@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Real-Time Notification Widget</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .notification-container {
+        position: relative;
+    }
+
+    .bell {
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background: red;
+        color: white;
+        border-radius: 50%;
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .panel {
+        display: none;
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 250px;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .panel h3 {
+        margin: 0;
+        padding: 10px;
+        background: #007bff;
+        color: white;
+    }
+
+    .notification {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .notification:hover {
+        background: #f1f1f1;
+    }
+</style>
+</head>
+<body>
+
+<div class="notification-container">
+    <div class="bell" onclick="togglePanel()">🔔</div>
+    <div class="badge" id="badge">0</div>
+
+    <div class="panel" id="panel">
+        <h3>Notifications</h3>
+        <div id="list"></div>
+    </div>
+</div>
+
+<script>
+let notifications = [
+    "Welcome to the app!",
+    "Your profile is updated"
+];
+
+function renderNotifications() {
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    notifications.forEach(note => {
+        let div = document.createElement("div");
+        div.className = "notification";
+        div.innerText = note;
+        list.appendChild(div);
+    });
+
+    document.getElementById("badge").innerText = notifications.length;
+}
+
+function togglePanel() {
+    const panel = document.getElementById("panel");
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
+}
+
+// Simulate real-time notifications
+setInterval(() => {
+    const newMessages = [
+        "New message received",
+        "Someone liked your post",
+        "New friend request",
+        "System update available"
+    ];
+
+    let random = newMessages[Math.floor(Math.random() * newMessages.length)];
+    notifications.unshift(random);
+
+    renderNotifications();
+}, 5000);
+
+// Initial render
+renderNotifications();
+</script>
+
+</body>
+</html>
