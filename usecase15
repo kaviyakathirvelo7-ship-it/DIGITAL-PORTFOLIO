@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Calendar</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.calendar-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.day:hover {
+    background: #e0e0e0;
+}
+
+.today {
+    background: #007bff;
+    color: white;
+}
+
+.event-day {
+    background: #ffcc00;
+}
+.event-details {
+    margin-top: 10px;
+    padding: 10px;
+    background: #fafafa;
+    border-radius: 5px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="calendar-container">
+    <div class="calendar-header">
+        <button id="prevMonth">&lt;</button>
+        <div id="monthYear"></div>
+        <button id="nextMonth">&gt;</button>
+    </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
+    <div class="event-details" id="eventDetails">Click a date to see events.</div>
+</div>
+
+<script>
+// Sample events
+const events = {
+    "2026-03-20": ["Project deadline", "Team meeting"],
+    "2026-03-25": ["Birthday party"],
+    "2026-03-28": ["Conference"]
+};
+
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+
+const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+const calendarGrid = document.getElementById("calendarGrid");
+const monthYear = document.getElementById("monthYear");
+const eventDetails = document.getElementById("eventDetails");
+
+function renderCalendar(month, year) {
+    calendarGrid.innerHTML = "";
+
+    monthYear.textContent = `${monthNames[month]} ${year}`;
+
+    // Days of week headers
+    const daysOfWeek = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    daysOfWeek.forEach(day => {
+        const dayHeader = document.createElement("div");
+        dayHeader.textContent = day;
+        dayHeader.style.fontWeight = "bold";
+        calendarGrid.appendChild(dayHeader);
+    });
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Empty slots before first day
+    for (let i = 0; i < firstDay; i++) {
+        const emptyDiv = document.createElement("div");
+        calendarGrid.appendChild(emptyDiv);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        const dayDiv = document.createElement("div");
+        dayDiv.className = "day";
+        dayDiv.textContent = day;
+
+        if (dateStr === new Date().toISOString().split('T')[0]) {
+            dayDiv.classList.add("today");
+        }
+
+        if (events[dateStr]) {
+            dayDiv.classList.add("event-day");
+        }
+
+        dayDiv.addEventListener("click", () => {
+            if (events[dateStr]) {
+                eventDetails.innerHTML = `<strong>Events on ${dateStr}:</strong><ul>${events[dateStr].map(ev => `<li>${ev}</li>`).join('')}</ul>`;
+            } else {
+                eventDetails.textContent = "No events on this date.";
+            }
+        });
+
+        calendarGrid.appendChild(dayDiv);
+    }
+}
+
+// Navigation buttons
+document.getElementById("prevMonth").addEventListener("click", () => {
+    currentMonth--;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    renderCalendar(currentMonth, currentYear);
+});
+
+document.getElementById("nextMonth").addEventListener("click", () => {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    renderCalendar(currentMonth, currentYear);
+});
+
+renderCalendar(currentMonth, currentYear);
+</script>
+
+</body>
+</html>
