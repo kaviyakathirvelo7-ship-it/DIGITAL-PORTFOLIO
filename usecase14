@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FAQ Expand/Collapse</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.faq-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.faq-question {
+    padding: 15px 20px;
+    cursor: pointer;
+    position: relative;
+    font-weight: bold;
+}
+
+.faq-question::after {
+    content: "\25BC"; /* Down arrow */
+    position: absolute;
+    right: 20px;
+    transition: transform 0.3s;
+}
+
+.faq-question.active::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 20px;
+    background: #fafafa;
+}
+
+.faq-answer p {
+    margin: 15px 0;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Frequently Asked Questions</h1>
+
+<div class="faq-container">
+    <div class="faq-item">
+        <div class="faq-question">What is your return policy?</div>
+        <div class="faq-answer">
+            <p>Our return policy allows you to return products within 30 days of purchase for a full refund.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Do you offer international shipping?</div>
+        <div class="faq-answer">
+            <p>Yes, we ship to many countries worldwide. Shipping fees and delivery times vary by location.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How can I track my order?</div>
+        <div class="faq-answer">
+            <p>Once your order is shipped, we will provide a tracking number via email.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+const faqQuestions = document.querySelectorAll(".faq-question");
+
+faqQuestions.forEach(question => {
+    question.addEventListener("click", () => {
+        question.classList.toggle("active");
+        const answer = question.nextElementSibling;
+
+        if (answer.style.maxHeight) {
+            answer.style.maxHeight = null;
+            answer.style.paddingTop = "0";
+            answer.style.paddingBottom = "0";
+        } else {
+            answer.style.maxHeight = answer.scrollHeight + "px";
+            answer.style.paddingTop = "15px";
+            answer.style.paddingBottom = "15px";
+        }
+    });
+});
+</script>
+
+</body>
+</html>
