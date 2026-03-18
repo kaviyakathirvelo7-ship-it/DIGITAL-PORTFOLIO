@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>REST API Integration</title>
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6f9;
+    margin: 0;
+}
+
+.header {
+    background: #34495e;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+.container {
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.loading {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>REST API Data Integration</h1>
+</div>
+
+<div class="container">
+    <div id="loading" class="loading">Loading data...</div>
+    <div id="data"></div>
+</div>
+
+<script>
+const apiURL = "https://jsonplaceholder.typicode.com/posts";
+
+async function fetchData() {
+    try {
+        let response = await fetch(apiURL);
+        let data = await response.json();
+
+        document.getElementById("loading").style.display = "none";
+
+        let container = document.getElementById("data");
+
+        data.slice(0, 5).forEach(item => {
+            let div = document.createElement("div");
+            div.className = "card";
+            div.innerHTML = `
+                <h3>${item.title}</h3>
+                <p>${item.body}</p>
+            `;
+            container.appendChild(div);
+        });
+
+    } catch (error) {
+        document.getElementById("loading").innerText = "Failed to load data!";
+    }
+}
+
+fetchData();
+</script>
+
+</body>
+</html>
