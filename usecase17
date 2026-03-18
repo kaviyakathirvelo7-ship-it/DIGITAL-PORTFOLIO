@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard with Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f9;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Dashboard with Charts</h1>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h3>Bar Chart</h3>
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <div class="card">
+        <h3>Line Chart</h3>
+        <canvas id="lineChart"></canvas>
+    </div>
+
+</div>
+
+<script>
+    // Bar Chart
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    const barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Sales',
+                data: [12, 19, 3, 5, 8],
+                backgroundColor: 'rgba(52, 152, 219, 0.7)'
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    // Line Chart
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+    const lineChart = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Growth',
+                data: [2, 4, 6, 8, 10],
+                borderColor: 'rgba(231, 76, 60, 1)',
+                fill: false,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+
+</body>
+</html>
