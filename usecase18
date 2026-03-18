@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Dashboard</title>
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f4f6f9;
+}
+
+.header {
+    background: #2c3e50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    flex: 1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.chart-bar {
+    height: 20px;
+    background: #3498db;
+    margin: 5px 0;
+    color: white;
+    text-align: right;
+    padding-right: 5px;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>Student Dashboard</h1>
+</div>
+
+<div class="container">
+
+    <!-- Profile -->
+    <div class="card">
+        <h3>Profile</h3>
+        <p>Name: John Doe</p>
+        <p>ID: 12345</p>
+        <p>Course: Computer Science</p>
+    </div>
+
+    <!-- Performance -->
+    <div class="card">
+        <h3>Performance</h3>
+        <div id="chart"></div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="card">
+        <h3>Notifications</h3>
+        <ul id="notifications"></ul>
+    </div>
+
+    <!-- News -->
+    <div class="card">
+        <h3>News</h3>
+        <ul id="news"></ul>
+    </div>
+
+</div>
+
+<script>
+// Performance Data
+let marks = [
+    { subject: "Math", score: 80 },
+    { subject: "Science", score: 70 },
+    { subject: "English", score: 90 }
+];
+
+let chartDiv = document.getElementById("chart");
+
+marks.forEach(m => {
+    let bar = document.createElement("div");
+    bar.className = "chart-bar";
+    bar.style.width = m.score + "%";
+    bar.innerText = m.subject + " (" + m.score + "%)";
+    chartDiv.appendChild(bar);
+});
+
+// Notifications
+let notifications = [
+    "Assignment due tomorrow",
+    "Exam schedule released",
+    "Project submission this week"
+];
+
+let notifList = document.getElementById("notifications");
+
+notifications.forEach(n => {
+    let li = document.createElement("li");
+    li.innerText = n;
+    notifList.appendChild(li);
+});
+
+// News
+let news = [
+    "College fest next month",
+    "New course introduced",
+    "Workshop on AI announced"
+];
+
+let newsList = document.getElementById("news");
+
+news.forEach(n => {
+    let li = document.createElement("li");
+    li.innerText = n;
+    newsList.appendChild(li);
+});
+</script>
+
+</body>
+</html>
